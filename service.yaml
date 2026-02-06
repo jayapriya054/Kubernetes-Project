@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Service
+metadata: 
+  name: frontend-app-service  #name of the Service.
+spec: 
+  type: ClusterIP   #front end app is accessible only inside kubernetes cluster,  need ingress /lb to make is accessible outisde.
+  ports: 
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: frontend-app
+
+  
+# The Service connects to the frontend

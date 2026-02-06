@@ -1,0 +1,21 @@
+# Browser -> Ingress (nginx) -> frontend-app-service (ClusterIP) -> frontend-app
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec: 
+  ingressClassName: nginx-example
+  rules: 
+  - host: app.com.34-100-224-46.sslip.io
+  - http: 
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-app-service
+            port:
+              number: 80

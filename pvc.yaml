@@ -1,0 +1,17 @@
+# A PersistentVolumeClaim (PVC) is a request for storage made by an application.
+# Pod → uses the PVC (request for storage) 
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frontend-app-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem #mounted like a normal dictionary
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: standard
+

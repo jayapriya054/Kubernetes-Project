@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1 #API group responsible for authorization and permissions in Kubernetes.
+kind: Role
+metadata:     #contains information for the ClusterRole
+  namespace: default
+  name: developer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list", "update", "escalate", "delete"]
+- apiGroups: [""] 
+  resources: ["services"]
+  verbs: ["get", "watch", "list", "update"]

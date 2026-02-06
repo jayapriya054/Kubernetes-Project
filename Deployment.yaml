@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment  #creating deployment resource
+metadata:
+  name: frontend-app  #The name of the Deployment.
+  labels: 
+    app: frontend-app  #added for identification or grouping
+spec:                 #deployment specification
+  replicas: 3
+  selector:            #how the Deployment finds its pods
+    matchLabels: 
+      app: frontend-app
+  template:            # how each Pod looks
+    metadata:
+      labels: 
+        app: frontend-app
+    spec:               #pod specification
+      volumes: 
+        - name: data-storage
+          persistentVolumeClaim:
+            claimName: frontend-app-pvc #This creates a volume called data-storage by attaching the PVC named frontend-app-pvc.
+      containers:
+      - name: frontend-app
+        image: jayapriya054/demo-frontend:latest
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/var/lib/store"
+          name: data-storage
+
+
+# Deployment runs the frontend
