@@ -1,21 +1,27 @@
-# Browser -> Ingress (nginx) -> frontend-app-service (ClusterIP) -> frontend-app
+# Browser -> Ingress (nginx) -> frontend-app-service (ClusterIP) -> frontend-app pods
+# Browser -> NodeIP:NodePort -> frontend-app-service (NodePort) -> frontend-app pods
+
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
-  name: minimal-ingress
+  name: frontend-ingress
+  namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "gce"  # Use GKE’s built-in Ingress Controller
 spec: 
-  ingressClassName: nginx-example
   rules: 
-  - host: app.com.34-100-224-46.sslip.io
+  - host: "" # it is left blank to test the external ip provided by GKE
   - http: 
       paths:
       - path: /
-        pathType: Prefix
+        pathType: Prefix 
         backend:
           service:
             name: frontend-app-service
             port:
               number: 80
+
+
+# Exposes the app externally from a browser using a host name 
+# (Without Ingress, the Service is ClusterIP → only accessible inside the cluster)
