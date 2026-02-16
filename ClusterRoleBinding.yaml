@@ -1,12 +1,15 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: clusterrolebinding
+  name: frontend-app-clusterrolebinding
 subjects:
-- kind: User
-  name : "developer-user"
-  apiGroup: rbac.authorization.k8s.io
+- kind: ServiceAccount  #ServiceAccount is an identity for a pod
+  name : developer-sa  #in local cluster k3d, ServiceAccount developer-sa should exists in namespace created, team1
+  namespace: team1
 roleRef: 
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: developer 
+  name: frontend-app-clusterrole
+
+
+  #This ClusterRoleBinding is basically connecting the ClusterRole (permissions) to a ServiceAccount (identity) so the pods can actually use those permissions.
