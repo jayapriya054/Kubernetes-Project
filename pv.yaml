@@ -2,13 +2,13 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: frontend-app-pv
-  labels:
-    type: local
 spec:
-  storageClassName: manual
+  storageClassName: standard
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: /tmp/frontend-data  # local folder on your laptop
+
+# In k3d: PV usually uses hostPath on your laptop.
