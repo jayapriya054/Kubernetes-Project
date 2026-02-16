@@ -2,6 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata: 
   name: frontend-app
+  namespace: team1
 spec: 
   scaleTargetRef:
     apiVersion: apps/v1
@@ -12,7 +13,7 @@ spec:
   metrics:
   - type: Resource
     resource:
-      name: cpu
+      name: memory
       target: 
         type: Utilization
-        averageUtilization: 60
+        averageUtilization: 70
