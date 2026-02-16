@@ -1,17 +1,16 @@
-# A PersistentVolumeClaim (PVC) is a request for storage made by an application.
-# Pod → uses the PVC (request for storage) 
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: frontend-app-pvc
+  namespace: team1
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem #mounted like a normal dictionary
   resources:
     requests:
       storage: 8Gi
-  storageClassName: standard
+  storageClassName: standard 
 
+
+# In GKE, standard automatically provisions a Persistent Disk, so don’t need to manually create a PV
+# In k3d/local, it needs a PV with hostPath since no cloud storage exists
