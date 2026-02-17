@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: frontend-app-service  #name of the Service.
+spec: 
+  type: LoadBalancer   
+  ports: 
+  - port: 80 #the port exposed by the Service inside the cluster.
+    protocol: TCP
+    targetPort: 5000  #container port where app is running
+  selector:
+    app: frontend-app
+
+  
+# The Service connects to the frontend
+# Creates a ClusterIP Service
+# Exposes port 80 inside the cluster
+# Forwards traffic to Pods

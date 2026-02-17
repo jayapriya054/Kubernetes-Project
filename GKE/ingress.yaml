@@ -1,0 +1,25 @@
+# Browser -> Ingress (nginx) -> frontend-app-service (ClusterIP) -> frontend-app
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: frontend-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "gce"  # Use GKE’s built-in Ingress Controller
+spec: 
+  rules: 
+  - host: "" # it is left blank to test the external ip provided by GKE
+  - http: 
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-app-service
+            port:
+              number: 80
+
+
+# Exposes the app externally from a browser using a host name 
+# (Without Ingress, the Service is ClusterIP → only accessible inside the cluster)

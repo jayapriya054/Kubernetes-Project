@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frontend-app-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: standard #GKE will auto provision a Persistent Disk so no need of PV file
+
+
+# A PersistentVolumeClaim (PVC) is a request for storage by a pod
+# Pod → uses the PVC to mount storage
