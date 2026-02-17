@@ -1,4 +1,5 @@
-_This project demonstrates how a Python Flask application is containerized with Docker, pushed to a registry, deployed on a local k3d Kubernetes cluster, and finally deployed on Google Kubernetes Engine (GKE) with autoscaling, security, storage, and ingress._
+**_This project demonstrates how a Python Flask application is containerized with Docker, pushed to a registry, deployed on a local k3d Kubernetes cluster, and finally deployed on Google Kubernetes Engine (GKE) with autoscaling, security, storage, and ingress._**
+
 
 
 1. Created a Python Flask application (app.py) that listens on port 5000 and returns Hello, World!.
